@@ -1,0 +1,4 @@
+
+colomns
+UPDATE `users_table` SET `user_id`='[value-1]',`user_name`='[value-2]',`user_email`='[value-3]',`user_password`='[value-4]' WHERE 1
+DatebaseName manystore
