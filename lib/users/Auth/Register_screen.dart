@@ -1,82 +1,10 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:manystore/connectionApi/Api.connection.dart';
 import 'package:manystore/users/Auth/model/model.dart';
-
-// class RegisterController extends GetxController {
-//   var obscurePassword = true.obs;
-//   var isLoading = false.obs;
-//   var passwordController = TextEditingController();
-//   var emailController = TextEditingController();
-//   var userNameController = TextEditingController();
-
-//   Future<bool> registerAndSaveUser() async {
-//     try {
-//       User userModel = User(
-//         user_name: userNameController.text.trim(),
-//         user_email: emailController.text.trim(),
-//         user_password: passwordController.text.trim(),
-//       );
-
-//       // Debug print to verify data
-//       print('Sending registration data:');
-//       print(jsonEncode(userModel.toJson()));
-
-//       var response = await http.post(
-//         Uri.parse(
-//             ApI.hostConnecUser), // Make sure this is your correct endpoint
-//         headers: {'Content-Type': 'application/json'},
-//         body: jsonEncode(userModel.toJson()),
-//       );
-
-//       // Debug print to see response
-//       print('Response status: ${response.statusCode}');
-//       print('Response body: ${response.body}');
-
-//       if (response.statusCode == 200) {
-//         var responseData = jsonDecode(response.body);
-//         return responseData['status'] == true;
-//       }
-//       return false;
-//     } catch (e) {
-//       print('Registration error: $e');
-//       return false;
-//     }
-//   }
-
-//   Future<void> register() async {
-//     isLoading.value = true;
-
-//     try {
-//       bool registrationSuccess = await registerAndSaveUser();
-
-//       if (registrationSuccess) {
-//         Fluttertoast.showToast(
-//           msg: "Registration successful",
-//           toastLength: Toast.LENGTH_SHORT,
-//           gravity: ToastGravity.BOTTOM,
-//           backgroundColor: Colors.green,
-//           textColor: Colors.white,
-//         );
-//         Get.back(); // Return to login screen
-//       } else {
-//         Fluttertoast.showToast(
-//           msg: "Registration failed",
-//           toastLength: Toast.LENGTH_SHORT,
-//           gravity: ToastGravity.BOTTOM,
-//           backgroundColor: Colors.red,
-//           textColor: Colors.white,
-//         );
-//       }
-//     } finally {
-//       isLoading.value = false;
-//     }
-//   }
-// }
 
 class RegisterController extends GetxController {
   // Controllers
@@ -182,188 +110,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         key: _formKey,
                         child: Column(
                           children: [
-                            // Added Username field
-                            // TextFormField(
-                            //   decoration: InputDecoration(
-                            //     labelText: 'Username',
-                            //     prefixIcon: Icon(Icons.person),
-                            //     hintText: 'Enter your username',
-                            //     fillColor: Colors.white,
-                            //     filled: true,
-                            //     border: OutlineInputBorder(
-                            //       borderRadius: BorderRadius.circular(10),
-                            //     ),
-                            //   ),
-                            //   validator: (value) {
-                            //     if (value == null || value.isEmpty) {
-                            //       return 'Please enter your username';
-                            //     }
-                            //     return null;
-                            //   },
-                            // ),
-                            // SizedBox(height: 16),
-                            // TextFormField(
-                            //   decoration: InputDecoration(
-                            //     labelText: 'Email',
-                            //     prefixIcon: Icon(Icons.email),
-                            //     hintText: 'Enter your email',
-                            //     fillColor: Colors.white,
-                            //     filled: true,
-                            //     border: OutlineInputBorder(
-                            //       borderRadius: BorderRadius.circular(10),
-                            //     ),
-                            //   ),
-                            //   validator: (value) {
-                            //     if (value == null || value.isEmpty) {
-                            //       return 'Please enter your email';
-                            //     }
-                            //     if (!value.contains('@')) {
-                            //       return 'Please enter a valid email';
-                            //     }
-                            //     return null;
-                            //   },
-                            // ),
-                            // SizedBox(height: 16),
-                            // Obx(
-                            //   () => TextFormField(
-                            //     obscureText:
-                            //         registerController.obscurePassword.value,
-                            //     decoration: InputDecoration(
-                            //       labelText: 'Password',
-                            //       prefixIcon: Icon(Icons.lock),
-                            //       suffixIcon: IconButton(
-                            //         icon: Icon(
-                            //           registerController.obscurePassword.value
-                            //               ? Icons.visibility_off
-                            //               : Icons.visibility,
-                            //         ),
-                            //         onPressed: () {
-                            //           // registerController.obscurePassword
-                            //           //     .toggle();
-                            //           print("is working");
-                            //         },
-                            //       ),
-                            //       hintText: 'Enter your password',
-                            //       fillColor: Colors.white,
-                            //       filled: true,
-                            //       border: OutlineInputBorder(
-                            //         borderRadius: BorderRadius.circular(10),
-                            //       ),
-                            //     ),
-                            //     validator: (value) {
-                            //       if (value == null || value.isEmpty) {
-                            //         return 'Please enter your password';
-                            //       }
-                            //       if (value.length < 6) {
-                            //         return 'Password must be at least 6 characters';
-                            //       }
-                            //       return null;
-                            //     },
-                            //   ),
-                            // ),
-
-                            // Obx(
-                            //   () => registerController.isLoading.value
-                            //       ? CircularProgressIndicator(
-                            //           color: Colors.white)
-                            //       : SizedBox(
-                            //           width: double.infinity,
-                            //           child: ElevatedButton(
-                            //             style: ElevatedButton.styleFrom(
-                            //               backgroundColor: Colors.white,
-                            //               padding: EdgeInsets.symmetric(
-                            //                   vertical: 16),
-                            //               shape: RoundedRectangleBorder(
-                            //                 borderRadius:
-                            //                     BorderRadius.circular(10),
-                            //               ),
-                            //             ),
-                            //             onPressed: () async {
-                            //               if (_formKey.currentState!
-                            //                   .validate()) {
-                            //                 await registerController.register();
-                            //               }
-                            //             },
-                            //             child: Text(
-                            //               'REGISTER',
-                            //               style: TextStyle(
-                            //                 color: Colors.deepPurpleAccent,
-                            //                 fontSize: 18,
-                            //                 fontWeight: FontWeight.bold,
-                            //               ),
-                            //             ),
-                            //           ),
-                            //         ),
-                            //),
-                            //SizedBox(height: 24),
-                            // Obx(
-                            //   () => registerController.isLoading.value
-                            //       ? CircularProgressIndicator(
-                            //           color: Colors.white)
-                            //       : SizedBox(
-                            //           width: double.infinity,
-                            //           child: ElevatedButton(
-                            //             style: ElevatedButton.styleFrom(
-                            //               backgroundColor: Colors.white,
-                            //               padding: EdgeInsets.symmetric(
-                            //                   vertical: 16),
-                            //               shape: RoundedRectangleBorder(
-                            //                 borderRadius:
-                            //                     BorderRadius.circular(10),
-                            //               ),
-                            //             ),
-                            //             onPressed: () {
-                            //               if (_formKey.currentState!
-                            //                   .validate()) {
-                            //                 registerController.register();
-                            //               }
-                            //             },
-                            //             child: Text(
-                            //               'REGISTER',
-                            //               style: TextStyle(
-                            //                 color: Colors.deepPurpleAccent,
-                            //                 fontSize: 18,
-                            //                 fontWeight: FontWeight.bold,
-                            //               ),
-                            //             ),
-                            //           ),
-                            //         ),
-                            // ),
-
-                            // Obx(
-                            //   () => registerController.isLoading.value
-                            //       ? CircularProgressIndicator(
-                            //           color: Colors.white)
-                            //       : SizedBox(
-                            //           width: double.infinity,
-                            //           child: ElevatedButton(
-                            //             style: ElevatedButton.styleFrom(
-                            //               backgroundColor: Colors.white,
-                            //               padding: EdgeInsets.symmetric(
-                            //                   vertical: 16),
-                            //               shape: RoundedRectangleBorder(
-                            //                 borderRadius:
-                            //                     BorderRadius.circular(10),
-                            //               ),
-                            //             ),
-                            //             onPressed: () async {
-                            //               if (_formKey.currentState!
-                            //                   .validate()) {
-                            //                 await registerController.register();
-                            //               }
-                            //             },
-                            //             child: Text(
-                            //               'REGISTER',
-                            //               style: TextStyle(
-                            //                 color: Colors.deepPurpleAccent,
-                            //                 fontSize: 18,
-                            //                 fontWeight: FontWeight.bold,
-                            //               ),
-                            //             ),
-                            //           ),
-                            //         ),
-                            // ),
-
                             TextFormField(
                               controller: registerController.userNameController,
                               decoration: InputDecoration(
@@ -428,7 +174,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 },
                               ),
                             ),
-
                             ElevatedButton(
                               onPressed: () async {
                                 // Validate returns true if form is valid
@@ -455,7 +200,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               },
                               child: Text('REGISTER'),
                             ),
-
                             SizedBox(height: 16),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.center,
